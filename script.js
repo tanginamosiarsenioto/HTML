@@ -273,36 +273,7 @@ function showProfile(username) {
   });
 }
 
-// Handle login form submit
-document.getElementById("loginFormElement").addEventListener("submit", function(e) {
-  e.preventDefault(); // stop page reload
-
-  const username = document.getElementById("loginUsername").value.trim();
-  const password = document.getElementById("loginPassword").value.trim();
-
-  // Simple demo check (replace with real backend later)
-  if (username === "admin" && password === "1234") {
-    alert("Login successful! Welcome " + username);
-    showProfile(username); // show profile dropdown
-    document.getElementById("loginModal").style.display = "none"; // close modal
-  } else {
-    alert("Invalid username or password. Try again!");
-  }
-});
-
-// Toggle password visibility
-document.getElementById("toggleLoginPassword").addEventListener("click", function() {
-  const passwordInput = document.getElementById("loginPassword");
-  if (passwordInput.type === "password") {
-    passwordInput.type = "text";
-    this.classList.replace("bx-show", "bx-hide");
-  } else {
-    passwordInput.type = "password";
-    this.classList.replace("bx-hide", "bx-show");
-  }
-});
-
-// Demo user accounts
+// Demo user accounts (replace with real backend later)
 const users = [
   { username: "admin", password: "1234" },
   { username: "heneralthird@gmail.com", password: "mypassword" },
@@ -340,3 +311,34 @@ document.getElementById("toggleLoginPassword").addEventListener("click", functio
   }
 });
 
+// Show Profile Icon and dropdown functionality
+function showProfile(username) {
+  const profileIcon = document.querySelector(".profile-icon");
+  profileIcon.style.display = "inline-block";
+
+  // Toggle dropdown
+  const icon = profileIcon.querySelector("i");
+  const dropdown = profileIcon.querySelector(".dropdown");
+  icon.addEventListener("click", () => {
+    dropdown.style.display = dropdown.style.display === "block" ? "none" : "block";
+  });
+
+  // Logout
+  document.getElementById("logoutBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("Logged out!");
+    profileIcon.style.display = "none";
+  });
+
+  // View Profile
+  document.getElementById("viewProfile").addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("Profile: " + username);
+  });
+
+  // Messages
+  document.getElementById("messagesBtn").addEventListener("click", (e) => {
+    e.preventDefault();
+    alert("No new messages right now!");
+  });
+}
